@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   
+      <property name = "hibernate.dialect">
+         org.hibernate.dialect.MySQL8Dialect
+      </property>
+      
+      <property name = "hibernate.connection.driver_class">
+         com.mysql.cj.jdbc.Driver
+      </property>
+      
+      <!-- Assume test is the database name -->
+      
+      <property name = "hibernate.connection.url">
+         jdbc:mysql://localhost:3308/online
+      </property>
+      
+      <property name = "hbm2ddl.auto">
+      update
+      </property>
+      
+      <property name = "hibernate.connection.username">
+         root
+      </property>
+      
+       <property name = "hibernate.connection.password">
+         Mayur@19
+      </property>
+      
+      <property name="show_sql">true</property>
+	
+      <mapping class = "com.hibernate.com.hibernate1to1.Address" />
+      <mapping class = "com.hibernate.com.hibernate1to1.Student" />
+   </session-factory>
+</hibernate-configuration>
