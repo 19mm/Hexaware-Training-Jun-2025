@@ -1,41 +1,54 @@
-package Java8;
-
 public class User {
-	int Uid;
-	String name;
-	Double salary;
+	String Uname;   // data member
+	String Passd;
+	String Email;
+	int age;
 	
-	User()	{}
 	
-	public User(int uid, String name, Double salary) {
-		super();
-		Uid = uid;
-		this.name = name;
-		this.salary = salary;
-	}
- 
-	public int getUid() {
-		return Uid;
-	}
-	public void setUid(int uid) {
-		Uid = uid;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Double getSalary() {
-		return salary;
-	}
-	public void setSalary(Double salary) {
-		this.salary = salary;
+	User()
+	{
+		Uname="";   // data member
+		Passd="";
+		Email="";
+		age=0;
 	}
 	
+	User(String  Uname,String Passd, String Email,int age)
+	{
+		this.Uname=Uname;
+		this.Passd=Passd;
+		this.Email=Email;
+		this.age=age;
+		
+	}
+	
+	public String getUname() {
+		return Uname;
+	}
+	public void setUname(String uname) {
+		Uname = uname;
+	}
+	public String getPassd() {
+		return Passd;
+	}
+	public void setPassd(String passd) {
+		Passd = passd;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	@Override
 	public String toString() {
-		return "User [Uid=" + Uid + ", name=" + name + ", salary=" + salary + "]";
+		return "User [Uname=" + Uname + ", Passd=" + Passd + ", Email=" + Email + ", age=" + age + "]";
 	}
 }
- 
+
