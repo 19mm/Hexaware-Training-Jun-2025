@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <bean id="project" class="Spring_Core.Spring_Core.Project">
+        <property name="pid" value="101"/>
+        <property name="duration" value="6 months"/>
+        <property name="cost" value="50000"/>
+    </bean>
+
+    <bean id="employee" class="Spring_Core.Spring_Core.Employee" init-method="afterPropertiesSet" destroy-method="destroy">
+        <property name="empId" value="1"/>
+        <property name="name" value="Alice"/>
+        <property name="sal" value="75000"/>
+        <property name="proj" ref="project"/>
+        <property name="address">
+            <map>
+                <entry key="home" value="Pune"/>
+                <entry key="office" value="Mumbai"/>
+            </map>
+        </property>
+    </bean>
+</beans>

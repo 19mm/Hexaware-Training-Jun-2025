@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="c1" class="Spring_Bank.Bank_Example.Customer">
+        <property name="act_no" value="101"/>
+        <property name="name" value="Parth"/>
+        <property name="bal" value="20000"/>
+        <property name="act_type" value="Saving"/>
+    </bean>
+    
+    <bean id="c2" class="Spring_Bank.Bank_Example.Customer">
+        <property name="act_no" value="102"/>
+        <property name="name" value="Namir"/>
+        <property name="bal" value="15000"/>
+        <property name="act_type" value="Saving"/>
+    </bean>
+    
+    <bean id="c3" class="Spring_Bank.Bank_Example.Customer">
+     <constructor-arg  index="0" value="103"/>
+          <constructor-arg  index="1" value="Mayuresh"/>
+          <constructor-arg  index="2" value="40000"/>
+          <constructor-arg  index="3" value="Current"/>
+	</bean>
+	
+	<bean id="l1" class="Spring_Bank.Bank_Example.Loan">
+	 	<property name="loanId" value="201"/>
+        <property name="loanAmt" value="15000"/>
+        <property name="emi" value="1500"/>
+	</bean>
+	
+	<bean id="c4" class="Spring_Bank.Bank_Example.Customer">
+		<property name="act_no" value="104"/>
+        <property name="name" value="Firodiya"/>
+        <property name="bal" value="25000"/>
+        <property name="act_type" value="Savings"/>
+        <property name="loan" ref="l1"/>
+	</bean>
+</beans>

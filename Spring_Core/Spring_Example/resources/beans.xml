@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="s1" class="Spring_Example.Spring_Example.Student">
+        <property name="roll_no" value="101"/>
+        <property name="name" value="Ajay"/>
+        <property name="fee" value="2000"/>
+    </bean>
+    
+    <bean id="s2" class="Spring_Example.Spring_Example.Student">
+        <property name="roll_no" value="102"/>
+        <property name="name" value="Vijay"/>
+        <property name="fee" value="3000"/>
+    </bean>
+    
+    <bean id="s3" class="Spring_Example.Spring_Example.Student">
+     <constructor-arg  index="0" value="103"/>
+          <constructor-arg  index="1" value="Asha"/>
+     
+          <constructor-arg  index="2" value="4000"/>
+	</bean>
+
+	<bean id="a1" class="Spring_Example.Spring_Example.Address">
+        <property name="hno" value="301"/>
+        <property name="city" value="Pune"/>
+        <property name="pcode" value="21109"/>
+    </bean>
+    
+    <bean id="s4" class="Spring_Example.Spring_Example.Student">
+    	<property name="roll_no" value="104"/>
+        <property name="name" value="Mayuresh"/>
+        <property name="fee" value="3000"/>
+        <property name="address" ref="a1"/>
+    </bean>
+    
+</beans>
