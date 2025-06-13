@@ -1,0 +1,434 @@
+------------------------------------------------
+
+PL SQL
+declare 
+// variable 
+a:=number;
+name: varchar(20)
+dept : varchar(20):="sales";
+ 
+begin
+ 
+  logic
+ 
+exception 
+      handle errors
+ 
+ 
+end
+
+
+dbms_output.put_line("welcome")
+
+-------------------------------------------------
+
+SQL> @demo1.sql
+
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  name VARCHAR2(20) := 'Asha Gupta';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Your name is ' || name);
+END;
+/
+
+--------------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  name VARCHAR2(20) := 'Namir';
+  age NUMBER := 22;
+  dept VARCHAR(20) := 'Java React';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Your Name :' || name || ' Age :' || age || ' Department :' || dept);
+END;
+/
+
+
+------------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  salary NUMBER := &salary;
+  bonus NUMBER;
+  total_salary NUMBER;
+BEGIN
+    bonus := salary * 0.05;
+    total_salary := salary + bonus;
+    DBMS_OUTPUT.PUT_LINE('Value of Bonus:' || bonus || ', Total Salary:' || total_salary);
+END;
+/
+
+------------------------------
+
+DECLARE
+  age NUMBER := &age;
+BEGIN
+    bonus := salary * 0.05;
+    total_salary := salary + bonus;
+    IF age > 22 THEN
+	DBMS_OUTPUT.PUT_LINE('You are eligible');
+    ELSE
+	DBMS_OUTPUT.PUT_LINE('You are not eligible');
+END;
+/
+
+
+-----------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  salary NUMBER := &salary;
+  bonus NUMBER;
+  total_salary NUMBER;
+BEGIN
+    IF salary >= 5000 THEN
+        bonus := salary * 0.10;
+    ELSE
+        bonus := salary * 0.05;
+    END IF;
+
+    total_salary := salary + bonus;
+    DBMS_OUTPUT.PUT_LINE('Value of Bonus:' || bonus || ', Total Salary:' || total_salary);
+END;
+/
+
+------------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  id NUMBER := &id;
+  pass NUMBER := &pass;
+BEGIN
+    IF id = 5000 THEN
+        IF pass = 1234 THEN
+            DBMS_OUTPUT.PUT_LINE('Correct Id and Password');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Incorrect Password!!');
+        END IF;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Id not found!!');
+    END IF;
+END;
+/
+
+----------------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  n NUMBER := &n;
+  fact NUMBER := 1;
+  i NUMBER;
+BEGIN
+    FOR i IN 1..n LOOP
+        fact := fact * i;
+    END LOOP;
+  
+    DBMS_OUTPUT.PUT_LINE('Factorial of ' || n || ' : ' || fact);
+END;
+/
+
+--------------------------------------
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  n NUMBER := &n;
+  i NUMBER;
+  check_prime BOOLEAN := TRUE;
+BEGIN
+  IF n <= 1 THEN
+    check_prime := FALSE;
+  ELSE
+    FOR i IN 2 .. FLOOR(SQRT(n)) LOOP
+      IF MOD(n, i) = 0 THEN
+        check_prime := FALSE;
+        EXIT;
+      END IF;
+    END LOOP;
+  END IF;
+
+  IF check_prime THEN
+    DBMS_OUTPUT.PUT_LINE(n || ' is a Prime Number');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(n || ' is Not a Prime Number');
+  END IF;
+END;
+/
+
+-----------------------------------
+
+-- create table student(roll number,fee number);
+
+-- INSERT INTO student VALUES(101, 300);
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  Roll number;
+  fee number;
+BEGIN
+  select roll,fee into Roll,fee from student where roll=101;
+  
+  if fee>200 then 
+    update student set fee=fee+100 where roll=101;
+  else
+    update student set fee=fee+200 where roll=101;
+  end if;
+
+  DBMS_OUTPUT.PUT_LINE( 'Old : ' ||   fee);
+
+  select roll,fee into Roll,fee from student where roll=101;
+
+  DBMS_OUTPUT.PUT_LINE( 'Updated : ' ||   fee);
+
+END;
+/
+
+----------------------------------
+
+This is in your db where you have access to make procedures 
+
+create or replace procedure calculatebonus(salary in number) as
+    bonus number;
+    total_salary number;
+begin
+    if salary <= 5000 then
+        bonus := salary * 0.05;
+    elsif salary > 5000 then
+        bonus := salary * 0.10;
+    else
+        bonus := 0;
+    end if;
+ 
+    total_salary := salary + bonus;
+ 
+    dbms_output.put_line('salary: ' || salary);
+    dbms_output.put_line('bonus: ' || bonus);
+    dbms_output.put_line('total salary: ' || total_salary);
+end;
+/
+
+BEGIN
+    calculatebonus(1000);
+END;
+/
+
+---------------------------------------
+
+create or replace procedure bonusSalary(salary in number) is
+bonus NUMBER;
+begin
+  bonus := salary + salary*0.1;
+  salary := salary + bonus;
+  dbms_output.put_line('Total salary'|| salary );
+end;
+
+ 
+begin
+  bonusSalary(2000);
+end;
+
+---------------------------------------
+
+This is for online
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+  PROCEDURE calculate_bonus(salary in number) as
+    bonus         NUMBER;
+    total_salary  NUMBER;
+  BEGIN
+    if salary < 5000 then
+      bonus := salary * 0.05;
+    else
+      bonus := salary * 0.10;
+    end if ;
+ 
+    total_salary := salary + bonus;
+ 
+    DBMS_OUTPUT.PUT_LINE('salary: ' || salary);
+    DBMS_OUTPUT.PUT_LINE('bonus: ' || bonus);
+    DBMS_OUTPUT.PUT_LINE('total: ' || total_salary);
+  END;
+ 
+BEGIN
+  calculate_bonus(4500);
+END;
+/
+
+--------------------------------------------
+
+function with create access
+
+create or replace function calToal(salary in number)
+return number
+as
+    bonus number;
+    total_salary number;
+begin
+ 
+    if salary <= 5000 then
+        bonus := salary * 0.05;
+    elsif salary > 5000 then
+        bonus := salary * 0.10;
+    else
+        bonus := 0;
+    end if;
+    total_salary := salary + bonus;
+  return   total_salary;
+end;
+/
+
+declare
+ts number;
+begin
+    ts:=calToal(5000);
+    dbms_output.put_line(ts);
+end ;
+/
+
+--------------------------------------------
+
+function without create access
+
+SET SERVEROUTPUT ON;
+ 
+DECLARE
+    ts number;
+    function calToal(salary in number)
+    return number
+    as
+        bonus number;
+        total_salary number;
+    begin
+    
+        if salary <= 5000 then
+            bonus := salary * 0.05;
+        elsif salary > 5000 then
+            bonus := salary * 0.10;
+        else
+            bonus := 0;
+        end if;
+        total_salary := salary + bonus;
+    return   total_salary;
+    end;
+BEGIN
+    ts:=calToal(5000);
+    dbms_output.put_line(ts);
+END;
+/
+
+----------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    f number;
+    FUNCTION factorial(digit IN NUMBER)
+    RETURN NUMBER
+    AS
+    fact NUMBER := 1;
+    BEGIN
+    FOR i IN 1..digit LOOP
+        fact := fact * i;
+    END LOOP;
+    
+    RETURN fact;
+END;
+
+BEGIN
+    f:=factorial(5);
+    dbms_output.put_line( 'Factorial :' || f );
+END;
+/
+
+------------------------------------------------
+
+create or replace procedure totsal(
+  salary  in number,  
+  bonus out number,
+  total out number
+) as
+begin
+  bonus := salary * 0.05;
+  total := salary + bonus;
+end;
+/
+ 
+set serveroutput on;
+declare
+  bonus number;
+  total number;
+  s number := 5000;
+begin
+  totsal(s, bonus, total);
+  dbms_output.put_line('Total salary is: ' || total);
+  dbms_output.put_line('Bonus is: ' || bonus);
+end;
+/
+
+--------------------------------------------------
+
+create or replace procedure getSalary ( dept IN VARCHAR, salary OUT NUMBER) AS
+BEGIN
+    IF dept = 'sales' THEN
+        salary := 20000;
+    ELSIF dept = 'admin' THEN
+        salary := 30000;
+    ELSIF dept = 'it' THEN
+        salary := 50000;
+    ELSE
+        salary := 0;
+    END IF;
+END;
+/
+
+DECLARE
+  salary number;
+  dept varchar(20);
+begin
+  salary := &salary;
+  dept := '&dept';  
+  getSalary(dept, salary);
+  dbms_output.put_line('salary : ' || salary );
+end;
+/
+
+--------------------------------------------------------
+
+TRIGGERS
+
+
+create  or replace Tri Name
+{before /after/instead of
+ 
+insert /update/delete
+on table 
+for each row 
+when (condition )
+ 
+begin
+end
+
+-----------------------------------
+
+CREATE OR REPLACE TRIGGER BankTr
+AFTER INSERT ON transaction
+FOR EACH ROW
+WHEN (NEW.TRANS_TYPE = 'deposit')
+BEGIN
+    UPDATE customer
+    SET balance = balance + :NEW.amount
+    WHERE cust_id = :NEW.cust_id;
+END;
+/
+
+SQL> insert into transaction values(2,101,100,'deposit',sysdate);
